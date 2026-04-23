@@ -6,12 +6,16 @@ android {
     namespace 'com.locationhook.module'
     compileSdk 34
 
-    defaultConfig {
+            defaultConfig {
         applicationId "com.locationhook.module"
         minSdk 26
         targetSdk 34
         versionCode 1
         versionName "1.0.0"
+        
+        manifestPlaceholders = [
+            AMAP_API_KEY: "19e8e38ae21e83cc851d0334c449d22e"
+        ]
     }
 
     
