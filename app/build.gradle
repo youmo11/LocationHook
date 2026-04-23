@@ -1,0 +1,44 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.locationhook.module'
+    compileSdk 36  // Android 16 (API 36)
+
+    defaultConfig {
+        applicationId "com.locationhook.module"
+        minSdk 26
+        targetSdk 36  // Android 16 (API 36)
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    // LSPosed API
+    compileOnly 'de.robv.android.xposed:api:82'
+    compileOnly 'de.robv.android.xposed:api:82:sources'
+    
+    // 高德地图SDK
+    implementation 'com.amap.api:map3d:latest.integration'
+    implementation 'com.amap.api:search:latest.integration'
+    implementation 'com.amap.api:location:latest.integration'
+    
+    // JSON处理
+    implementation 'com.google.code.gson:gson:2.10.1'
+    
+    // 日志
+    implementation 'com.orhanobut:logger:2.2.0'
+}

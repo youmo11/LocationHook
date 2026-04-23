@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 基础权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    
+    <!-- 定位权限 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    
+    <!-- 模拟定位权限 -->
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    
+    <!-- 后台定位权限 (Android 10+) -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    
+    <!-- 存储权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    
+    <!-- 网络状态权限 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    
+    <!-- 系统配置权限 -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    
+    <!-- 高德地图SDK权限 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- LSPosed模块声明 -->
+    <meta-data
+        android:name="xposedmodule"
+        android:value="true" />
+    <meta-data
+        android:name="xposeddescription"
+        android:value="LSPosed定位Hook模块 - 支持位置模拟、路线规划、高德地图集成" />
+    <meta-data
+        android:name="xposedminversion"
+        android:value="82" />
+    
+    <!-- 高德地图Key配置 -->
+    <meta-data
+        android:name="com.amap.api.v2.apikey"
+        android:value="${AMAP_API_KEY}" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.LocationHook">
+        
+        <!-- 主界面 -->
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <!-- 路线规划界面 -->
+        <activity
+            android:name=".ui.RoutePlanActivity"
+            android:exported="false"
+            android:label="@string/route_plan" />
+        
+        <!-- 应用选择界面 -->
+        <activity
+            android:name=".ui.AppSelectActivity"
+            android:exported="false"
+            android:label="@string/app_select" />
+            
+        <!-- 设置界面 -->
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:exported="false"
+            android:label="@string/settings" />
+            
+        <!-- 高德定位服务 -->
+        <service android:name="com.amap.api.location.APSService" />
+        
+        <!-- LSPosed偏好设置 -->
+        <provider
+            android:name="de.robv.android.xposed.provider.XPreferencesProvider"
+            android:authorities="${applicationId}.xpreferences"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
+
+    </application>
+
+</manifest>
