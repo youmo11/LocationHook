@@ -12,11 +12,16 @@ task clean(type: Delete) {
 ext {
     amap_api_key = "请输入你的高德地图API Key"
     // 或者从local.properties读取
-    Properties properties = new Properties()
-    if (file('local.properties').exists()) {
-        properties.load(new FileInputStream(file('local.properties')))
-        if (properties.containsKey('AMAP_API_KEY')) {
-            amap_api_key = properties.getProperty('AMAP_API_KEY')
+    try {
+        Properties properties = new Properties()
+        if (file('local.properties').exists()) {
+            properties.load(new FileInputStream(file('local.properties')))
+            if (properties.containsKey('AMAP_API_KEY')) {
+                amap_api_key = properties.getProperty('AMAP_API_KEY')
+            }
         }
+    } catch (Exception e) {
+        // 如果读取失败，使用默认值
+        amap_api_key = "19e8e38ae21e83cc851d0334c449d22e"
     }
 }
