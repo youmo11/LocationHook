@@ -4,7 +4,8 @@ plugins {
 
 android {
     namespace 'com.locationhook.module'
-    compileSdk 36  // Android 16 (API 36)
+    compileSdk 34  // Android 14 (API 34)
+    targetSdk 34  // Android 14 (API 34)
 
     defaultConfig {
         applicationId "com.locationhook.module"
